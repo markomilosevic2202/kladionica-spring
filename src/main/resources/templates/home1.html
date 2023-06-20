@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Moja strana</title>
+    <style>
+    /* CSS stilovi za centriranje naslova */
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+     h1 {
+      font-size: 100px;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+<h1>Naslov strane</h1>
+<div id="user-info">
+    <span id="username">Ime korisnika</span>
+    <button id="logout-btn">Odjava</button>
+</div>
+<section>
+    <h2>Linkovi</h2>
+    <ul>
+        <li><a href="#">Link 1</a></li>
+        <li><a href="#">Link 2</a></li>
+        <li><a href="#">Link 3</a></li>
+        <li><a href="#">Link 4</a></li>
+        <li><a href="#">Link 5</a></li>
+    </ul>
+</section>
+</body>
+</html>

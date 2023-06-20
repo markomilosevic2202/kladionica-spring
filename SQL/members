@@ -1,0 +1,34 @@
+USE `kladionica`;
+
+DROP TABLE IF EXISTS `roles`;
+DROP TABLE IF EXISTS `members`;
+
+
+CREATE TABLE `members` (
+  `user_id` varchar(50) NOT NULL,
+  `pw` char(68) NOT NULL,
+  `email` tinyint NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+INSERT INTO `members`
+VALUES
+('marko','{bcrypt}$2a$10$Npv6CxrLEb4ukQmFYn8KnOjaeZKhp/fqTU9vyvimNL.nsjXrKDx7S','dksjfkds@gmail.com'),
+('pedja','{bcrypt}$2a$10$qeS0HEh7urweMojsnwNAR.vcXJeXR1UcMRZ2WcGQl9YeuspUdgF.q','dksjsdsdfkds@gmail.com'),
+('somi','{bcrypt}$2a$10$qeS0HEh7urweMojsnwNAR.vcXJeXR1UcMRZ2WcGQl9YeuspUdgF.q','dksjfsdfdkds@gmail.com');
+
+CREATE TABLE `roles` (
+  `user_id` varchar(50) NOT NULL,
+  `role` varchar(50) NOT NULL,
+  UNIQUE KEY `authorities5_idx_1` (`user_id`,`role`),
+  CONSTRAINT `authorities5_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `members` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+INSERT INTO `roles`
+VALUES
+('marko','ROLE_EMPLOYEE'),
+('pedja','ROLE_EMPLOYEE'),
+('somi','ROLE_EMPLOYEE'),
+('marko','ROLE_ADMIN');

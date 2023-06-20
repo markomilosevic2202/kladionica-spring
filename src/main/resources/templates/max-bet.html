@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html>
+<head>
+    <title>Max-Bet</title>
+    <style>
+    body {
+      background-image: url("max-bet.jpg");
+      background-size: cover;
+      background-opacity: 0.5;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 20px;
+      margin: 20px;
+      max-width: 400px;
+    }
+
+    .naslov {
+      font-size: 100px;
+    }
+
+    .padajuca-lista {
+      width: 200px;
+      height: 50px;
+    }
+
+    .unos-polje {
+      width: 300px;
+      height: 40px;
+     margin-right: 10px;
+     margin-left: 10px;
+    }
+
+
+    .dugme-submit {
+      width: 100px;
+      height: 100px;
+    }
+  .input1 {
+  margin-left: 24px;
+}
+}
+  </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="naslov">Max-bet obicni mecevi</h1>
+    <hr>
+    <form id = 'myFormaction="#" th:action="@{/save}"
+          th:object="${call}"  >
+
+        <label for="opcija">Period pretrage: </label>
+        <select name="time" id="opcija" class="padajuca-lista">
+            <option value="3">3h</option>
+            <option value="5">5h</option>
+            <option value="12" >12h</option>
+            <option value="24">24h</option>
+            <option value="48" selected>48h</option>
+            <option value="all">all</option>
+        </select>
+
+
+
+        <br>
+        <hr>
+        <label class = "label1">Email   </label>
+
+
+
+        <input type="text" name="email"  th:value="${member.email}" class="unos-polje input1">
+
+
+        <br>
+        <hr>
+        <label class = "label2">Adressa </label>
+        <input type="text" name="address"  th:value="${address.address}"  class="unos-polje input2">
+
+        <br>
+        <hr>
+
+        <button type="submit" class="btn btn-info col-2">Save</button>
+    </form>
+</div>
+<script th:inline="javascript">
+        /* Retrieve success parameter from model */
+        var success = /*[[${success}]]*/ false;
+        if (success) {
+            /* Delayed redirect after 5 seconds */
+            setTimeout(function() {
+                document.getElementById('myForm').submit();
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

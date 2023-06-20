@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Kladionica</title>
+</head>
+<style>
+    /* CSS stilovi za centriranje naslova */
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+     h1 {
+      font-size: 100px;
+      color: green;
+    }
+  </style>
+<body>
+<h1>KLADIONICA</h1>
+<hr>
+User: <span sec:authentication="principal.username"></span>
+User: <span sec:authentication="principal.username"></span>
+User: <span sec:authentication="principal.username"></span>
+<br><br>
+<hr>
+<h2>Linkovi</h2>
+<ul>
+    <li><a th:href="@{/maxbet}">Max Bet Ordinary Matchs</a>
+    <li><a th:href="@{/systems}">Max Bet Bonus Matchs</a>
+    <li><a th:href="@{/systems}">Meridijan</a>
+    <li><a th:href="@{/systems}">Mozart</a>
+
+</ul>
+
+<hr>
+<!-- Add a link to pint to /leaders . . . . this is for the managers -->
+<div sec:authorize="hasRole('ADMIN')">
+    <p>
+        <a th:href="@{/leaders}">Leadership Meeting</a>
+         (Only for Manager peeps)
+     </p>
+
+</div>
+<hr>
+<div sec:authorize="hasRole('ADMIN')">
+<p>
+    <a th:href="@{/systems}">STATISTIKA KORISNIKA</a>
+
+</p>
+</div>
+
+<hr>
+
+<!-- display user name -->
+
+
+<form action="#" th:action="@{/logout}" method="POST">
+    <input type="submit" value="Logout"/>
+</form>
+</body>
+</html>
