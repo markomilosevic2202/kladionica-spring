@@ -36,21 +36,36 @@
 
 
     .dugme-submit {
-      width: 100px;
-      height: 100px;
+      width: 200px;
+      height: 200px;
     }
   .input1 {
   margin-left: 24px;
 }
-}
+.popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #f1f1f1;
+      padding: 40px;
+      border: 1px solid #ccc;
+      width: 80%;
+      max-width: 600px;
+      text-align: center;
+      background-color: #f9f9f9;
+      font-size: 50px;
+      }
+
+
   </style>
 </head>
 <body>
 <div class="container">
     <h1 class="naslov">Max-bet obicni mecevi</h1>
     <hr>
-    <form id = 'myFormaction="#" th:action="@{/save}"
-          th:object="${call}"  >
+    <form id = 'myForm' action="#"    th:object='${call}'  th:action='@{/save}';    >
 
         <label for="opcija">Period pretrage: </label>
         <select name="time" id="opcija" class="padajuca-lista">
@@ -83,16 +98,10 @@
 
         <button type="submit" class="btn btn-info col-2">Save</button>
     </form>
+
+
 </div>
-<script th:inline="javascript">
-        /* Retrieve success parameter from model */
-        var success = /*[[${success}]]*/ false;
-        if (success) {
-            /* Delayed redirect after 5 seconds */
-            setTimeout(function() {
-                document.getElementById('myForm').submit();
-            }, 5000);
-        }
-    </script>
+<
+
 </body>
 </html>
