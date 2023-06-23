@@ -4,24 +4,17 @@ package marko.kladionica.contoller;
 import lombok.RequiredArgsConstructor;
 import marko.kladionica.entity.Address;
 import marko.kladionica.entity.Call;
-import marko.kladionica.entity.Employee;
 import marko.kladionica.entity.Member;
-import marko.kladionica.example.test_data_bils.Match;
 import marko.kladionica.service.AddressServiceImpl;
 import marko.kladionica.service.MaxiService;
-import marko.kladionica.service.MembersService;
 import marko.kladionica.service.MembersServiceImpl;
 import marko.kladionica.service.selenium.MaxBetService;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
-import java.util.List;
 
 
 @Controller
@@ -63,7 +56,11 @@ public class DemoController {
     @GetMapping("/save")
     public String saveEmployee(@ModelAttribute("call") Call theCall){
 
-        maxBetService.getAllMatches();
+        try {
+            maxBetService.getAllMatchesMaxBetBonus(theCall.getAddress(),theCall.getTime());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         return "home";
     }

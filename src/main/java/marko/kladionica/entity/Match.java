@@ -1,4 +1,4 @@
-package marko.kladionica.example.test_data_bils;
+package marko.kladionica.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;

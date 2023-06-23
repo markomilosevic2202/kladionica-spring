@@ -1,8 +1,7 @@
-package marko.kladionica.example.page_factory;
+package marko.kladionica.page_factory;
 
-
-import marko.kladionica.example.test_data_bils.Match;
-import marko.kladionica.example.test_data_bils.MatchDifferences;
+import marko.kladionica.entity.Match;
+import marko.kladionica.entity.MatchDifferences;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
 import java.time.Duration;
@@ -21,8 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class Foreign {
 
+
+public class Foreign {
     @FindBy(xpath = "//*[contains(@class, 'biab_group-markets-table js-inplay-market')]")
     List<WebElement> listMatchWeb;
 
@@ -102,7 +103,7 @@ public class Foreign {
 
 
         List<Match> matches = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 1; i++) {
 
             Thread.sleep(500);
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
@@ -140,8 +141,8 @@ public class Foreign {
         return matches;
     }
 
-    public MatchDifferences[] addOppositeOdds(MatchDifferences[] matchDifferences)  {
-
+    public MatchDifferences[] addOppositeOdds(List<MatchDifferences> matchDifferencesList)  {
+        MatchDifferences[] matchDifferences = matchDifferencesList.toArray(new MatchDifferences[0]);
         String name = null;
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         for (int i = 0; i < matchDifferences.length; i++) {
@@ -157,8 +158,8 @@ public class Foreign {
                     higherOdds = 0;
                     higherOddsString = matchDifferences1.getTwoHome();
                 }
-               if (Double.parseDouble(matchDifferences1.getOneDifferences()) < Double.parseDouble(matchDifferences1.getDifferencesX()) &&
-                       Double.parseDouble(matchDifferences1.getTwoDifferences()) < Double.parseDouble(matchDifferences1.getDifferencesX())){
+                if (Double.parseDouble(matchDifferences1.getOneDifferences()) < Double.parseDouble(matchDifferences1.getDifferencesX()) &&
+                        Double.parseDouble(matchDifferences1.getTwoDifferences()) < Double.parseDouble(matchDifferences1.getDifferencesX())){
                     higherOdds = 2;
                     higherOddsString = matchDifferences1.getHomeX();
                 }
@@ -168,9 +169,9 @@ public class Foreign {
 
                 driver.navigate().refresh();
                 new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(@class, 'biab_search-results js-search-results')]")));
-               // Thread.sleep(1000);
-               // driver.findElement(By.xpath("//a[contains(text(),'" + characterReplacement + "')]")).click();
-               WebElement firstMatchOnList  = driver.findElement(By.xpath("//*[contains(@class, 'biab_search-results js-search-results')]"));
+                // Thread.sleep(1000);
+                // driver.findElement(By.xpath("//a[contains(text(),'" + characterReplacement + "')]")).click();
+                WebElement firstMatchOnList  = driver.findElement(By.xpath("//*[contains(@class, 'biab_search-results js-search-results')]"));
                 firstMatchOnList.findElement(By.xpath(".//a")).click();
                 //Thread.sleep(2000);
                 new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Correct Score')]")));
@@ -218,9 +219,4 @@ public class Foreign {
         return String.valueOf(earningsRound);
     }
 }
-
-
-
-
-
 
