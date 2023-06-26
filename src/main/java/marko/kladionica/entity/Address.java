@@ -24,4 +24,7 @@ public class Address {
 
     @Column(name="address")
     private String address;
+
+//    @OneToOne(mappedBy = "address", cascade =  {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+//    private Reports reports;
 }

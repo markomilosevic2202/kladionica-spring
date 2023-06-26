@@ -1,6 +1,5 @@
 package marko.kladionica.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,8 +9,6 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Member {
 
     @Id
@@ -21,6 +18,8 @@ public class Member {
 
     @Column(name="pw")
     private String pw;
+
+
 
     @Column(name="email")
     private String email;

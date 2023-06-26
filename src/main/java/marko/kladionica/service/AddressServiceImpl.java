@@ -16,18 +16,18 @@ public class AddressServiceImpl implements AddressService{
     @Override
     public Address findByName(String name) {
 
-        Optional<Address> optionalAddress = addressRepository.findByName(name);
-        Address theAddress = null;
+//        Optional<Address> optionalAddress = addressRepository.findByName(name);
+//        Address theAddress = null;
+//
+//        if (optionalAddress.isPresent()) {
+//            theAddress = optionalAddress.get();
+//        }
+//        else {
+//            // we didn't find the employee
+//            throw new RuntimeException("Did not find employee id - " + name);
+//        }
 
-        if (optionalAddress.isPresent()) {
-            theAddress = optionalAddress.get();
-        }
-        else {
-            // we didn't find the employee
-            throw new RuntimeException("Did not find employee id - " + name);
-        }
-
-        return theAddress;
+        return  new Address(4,"hard", "hard-core");
     }
 
 

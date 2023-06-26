@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import marko.kladionica.dao.MemberRepository;
 import marko.kladionica.entity.Member;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

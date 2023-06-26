@@ -2,9 +2,11 @@ package marko.kladionica.service.selenium;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import marko.kladionica.entity.Address;
 import marko.kladionica.entity.MatchDifferences;
 import marko.kladionica.page_factory.MaxBet;
 import marko.kladionica.entity.Match;
+import marko.kladionica.service.AddressServiceImpl;
 import org.openqa.selenium.WebDriver;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,7 @@ public class MaxBetService {
     private final EmailService emailService;
     private final ForeignService foreignService;
     private final CompareService compareService;
+    private final AddressServiceImpl addressService;
     private WebDriver driver;
 
 
@@ -53,6 +56,8 @@ public class MaxBetService {
 
     private List<Match> getListMaxbetOrdinaryMatch(String address, String hoursOfReview) {
         try {
+            Address theAddress = addressService.findByName("orbitxch");
+            System.out.println(theAddress.getAddress());
 
             this.driver = WebDriverService.getWebdriver();
             MaxBet maxBet = new MaxBet(driver);

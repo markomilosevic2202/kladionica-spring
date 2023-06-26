@@ -6,7 +6,7 @@
     <title>Mozzart</title>
     <style>
     body {
-      background-image: url("max-bet.jpg");
+      background-image: url("mozzart-bet.jpg");
       background-size: cover;
       background-opacity: 0.5;
     }
@@ -65,7 +65,7 @@
 <div class="container">
     <h1 class="naslov">Mozzart obicni mecevi</h1>
     <hr>
-    <form id = 'myForm' action="#"    th:object='${call}'  th:action='@{/save}';    >
+    <form id = 'myForm' action="#"    th:object='${call}'  th:action='@{/saveMozzart}';    >
 
         <label for="opcija">Period pretrage: </label>
         <select name="time" id="opcija" class="padajuca-lista">
