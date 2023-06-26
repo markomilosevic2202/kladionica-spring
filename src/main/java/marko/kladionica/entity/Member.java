@@ -13,8 +13,8 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="user_id")
-    private String userId;
+    @Column(name="member_id")
+    private int id;
 
     @Column(name="pw")
     private String pw;

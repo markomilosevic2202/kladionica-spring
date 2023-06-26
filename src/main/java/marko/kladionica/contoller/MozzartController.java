@@ -8,7 +8,6 @@ import marko.kladionica.entity.Call;
 import marko.kladionica.entity.Member;
 import marko.kladionica.service.AddressServiceImpl;
 import marko.kladionica.service.MembersServiceImpl;
-import marko.kladionica.service.ReportsService;
 import marko.kladionica.service.selenium.MaxBetService;
 import marko.kladionica.service.selenium.MozzartService;
 import org.springframework.stereotype.Controller;
@@ -20,37 +19,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.security.Principal;
 
 @Controller
-@RequestMapping("/maxbet")
+@RequestMapping("/mozzart")
 @RequiredArgsConstructor
-public class MaxBetController {
+public class MozzartController {
+
     private final MembersServiceImpl membersService;
     private final AddressServiceImpl addressService;
     private final MaxBetService maxBetService;
-    private final ReportsService reportsService;
+    private final MozzartService mozzartService;
+    private final ReportsRepository reportsRepository;
 
+    @GetMapping
+    public String showMozzart(Model theModel, Principal principal) {
 
-    @GetMapping()
-    public String showMaxBet(Model theModel, Principal principal) {
+        System.out.println(principal.toString());
 
-//        Member theMember = membersService.findById(principal.getName());
-//        Address theAddress = addressService.findByName("maxbet");
-//
-//        theModel.addAttribute("member", theMember);
-//        theModel.addAttribute("address", theAddress);
+        Member theMember = membersService.findById(principal.getName());
+        Address theAddress = addressService.findByName("mozzartbet");
 
-        return "max-bet";
+        theModel.addAttribute("member", theMember);
+        theModel.addAttribute("address", theAddress);
+
+        return "mozzart";
     }
-
     @GetMapping("/save")
-    public String saveMaxBet(@ModelAttribute("call") Call theCall) {
+    public String saveMozzart(@ModelAttribute("call") Call theCall) {
 
-//        try {
-//            maxBetService.getAllMatchesMaxBetBonus(theCall.getAddress(), theCall.getTime());
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-        reportsService.save();
-
+        try {
+            mozzartService.getAllMatchesMozzartOrdinary(theCall.getAddress(), theCall.getTime());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         return "home";
     }
 }

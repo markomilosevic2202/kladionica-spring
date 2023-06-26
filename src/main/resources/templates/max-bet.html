@@ -65,7 +65,7 @@
 <div class="container">
     <h1 class="naslov">Max-bet obicni mecevi</h1>
     <hr>
-    <form id = 'myForm' action="#"    th:object='${call}'  th:action='@{/saveMaxBet}';    >
+    <form id = 'myForm' action="#"    th:object='${call}'  th:action='@{/maxbet/save}';    >
 
         <label for="opcija">Period pretrage: </label>
         <select name="time" id="opcija" class="padajuca-lista">
@@ -85,13 +85,13 @@
 
 
 
-        <input type="text" name="email"  th:value="${member.email}" class="unos-polje input1">
+<!--        <input type="text" name="email"  th:value="${member.email}" class="unos-polje input1">-->
 
 
-        <br>
-        <hr>
-        <label class = "label2">Adressa </label>
-        <input type="text" name="address"  th:value="${address.address}"  class="unos-polje input2">
+<!--        <br>-->
+<!--        <hr>-->
+<!--        <label class = "label2">Adressa </label>-->
+<!--        <input type="text" name="address"  th:value="${address.address}"  class="unos-polje input2">-->
 
         <br>
         <hr>

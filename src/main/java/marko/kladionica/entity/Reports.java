@@ -3,6 +3,8 @@ package marko.kladionica.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name="reports")
 @Getter
@@ -18,7 +20,7 @@ public class Reports {
     private int id;
 
     @Column(name="date")
-    private String date;
+    private LocalDateTime date;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "address_id")
@@ -27,6 +29,11 @@ public class Reports {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @PrePersist
+    private void prePersist(){
+        this.date = LocalDateTime.now();
+    }
 
     @Override
     public int hashCode() {
