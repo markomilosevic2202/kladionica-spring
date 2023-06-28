@@ -16,6 +16,9 @@ public interface MemberRepository extends JpaRepository<Member, String> {
     @Query("select m from Member m where m.email = ?1")
     Optional<Member> findByEmail(String email);
 
+    @Query("select m from Member m where m.name = ?1")
+    Optional<Member> findByName(String email);
+
 
 
     // that's it ... no need to write any code LOL!

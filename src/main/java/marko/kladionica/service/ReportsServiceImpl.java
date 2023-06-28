@@ -8,9 +8,8 @@ import marko.kladionica.entity.Address;
 import marko.kladionica.entity.Member;
 import marko.kladionica.entity.Reports;
 import org.springframework.stereotype.Service;
-import weka.filters.unsupervised.attribute.Add;
 
-import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,23 +19,25 @@ public class ReportsServiceImpl implements ReportsService {
     private final ReportsRepository reportsRepository;
     private final MemberRepository memberRepository;
     private final AddressRepository addressRepository;
+    private static Integer  i = 0;
 
     @Override
-    public void save() {
+    public void save(String address, String nameMember) {
         try {
-            Optional<Member> optionalMember = memberRepository.findByEmail("sada@gmail.com");
+            Optional<Member> optionalMember = memberRepository.findByName(nameMember);
             if (optionalMember.isEmpty()) {
                 Member memeber = new Member();
-                memeber.setEmail("sada@gmail.com");
+                memeber.setEmail(nameMember);
                 memeber.setPw("dsvsdv");
                 optionalMember = Optional.of(memberRepository.save(memeber));
             }
-            Optional<Address> optionalAddress = addressRepository.findByName("maxbet");
+            Optional<Address> optionalAddress = addressRepository.findByAddress(address);
             if (optionalAddress.isEmpty()) {
-                Address address = new Address();
-                address.setName("maxbet");
-                address.setAddress("www.maxbet.com");
-                optionalAddress = Optional.of(addressRepository.save(address));
+                i++;
+                Address addressLocal = new Address();
+                addressLocal.setName("maxbet" + i );
+                addressLocal.setAddress(address);
+                optionalAddress = Optional.of(addressRepository.save(addressLocal));
             }
             Reports reports = new Reports();
             reports.setMember(optionalMember.get());
@@ -45,5 +46,17 @@ public class ReportsServiceImpl implements ReportsService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List<Reports> getList() {
+        return reportsRepository.findAll();
+    }
+
+    @Override
+    public List<Reports> getListByUser(String nameMember) {
+
+        List<Reports> optionalAddress = reportsRepository.findByMemberId(nameMember);
+        return optionalAddress;
     }
 }

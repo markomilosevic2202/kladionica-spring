@@ -16,6 +16,9 @@ public class Member {
     @Column(name="member_id")
     private int id;
 
+    @Column(name="name")
+    private String name;
+
     @Column(name="pw")
     private String pw;
 

@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <style>
+        /* Stilizacija padajućeg menija */
+        .padajuca-lista {
+            width: 50%;
+            height: 30px;
+            font-size: 14px;
+            display: inline-block;
+            margin-right: 10px;
+            width: 100px;
+        }
+
+        /* Stilizacija dugmeta */
+        .btn-info {
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+            height: 30px;
+            font-size: 14px;
+        }
+
+        /* Margina između padajućeg menija i tabele */
+        .table {
+            margin-top: 20px;
+        }
+
+
+    </style>
+
+    <title>Employee Directory</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Employee Directory</h3>
+    <hr>
+    <a th:href="@{/}"
+       class="btn btn-primary btn-sm mb-3">
+        Beck Home
+    </a>
+
+    <div>
+        <label id="libelFilter">Filter by User:</label>
+        <form id='myForm' action="#" th:object="${user}" th:action="@{/reports/user}">
+            <select name="name" id="opcija" class="padajuca-lista" onchange="submitForm()">
+                <option value="">All</option>
+                <option th:each="tempMember : ${member}" th:text="${tempMember.name}"></option>
+            </select>
+        </form>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>Number</th>
+            <th>Date</th>
+            <th>Address</th>
+            <th>User</th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="tempReports, index : ${reports}">
+            <td th:text="${index.count}"/>
+            <td th:text="${tempReports.date}"/>
+            <td th:text="${tempReports.address.address}"/>
+            <td th:text="${tempReports.member.name}"/>
+
+        </tr>
+        </tbody>
+    </table>
+
+    <script>
+    function submitForm() {
+        document.getElementById('myForm').submit();
+    }
+</script>
+
+
+</div>
+
+</body>
+</html>
+
+
+

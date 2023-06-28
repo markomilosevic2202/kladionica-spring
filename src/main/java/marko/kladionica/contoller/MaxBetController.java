@@ -2,6 +2,7 @@ package marko.kladionica.contoller;
 
 
 import lombok.RequiredArgsConstructor;
+import marko.kladionica.dao.MemberRepository;
 import marko.kladionica.dao.ReportsRepository;
 import marko.kladionica.entity.Address;
 import marko.kladionica.entity.Call;
@@ -18,38 +19,40 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/maxbet")
 @RequiredArgsConstructor
 public class MaxBetController {
-    private final MembersServiceImpl membersService;
+
     private final AddressServiceImpl addressService;
-    private final MaxBetService maxBetService;
     private final ReportsService reportsService;
+    private final MemberRepository memberRepository;
 
 
     @GetMapping()
     public String showMaxBet(Model theModel, Principal principal) {
 
-//        Member theMember = membersService.findById(principal.getName());
-//        Address theAddress = addressService.findByName("maxbet");
-//
-//        theModel.addAttribute("member", theMember);
-//        theModel.addAttribute("address", theAddress);
+
+        Address theAddress = addressService.findByName("maxbet");
+        theModel.addAttribute("address", theAddress);
+
+        Member theMember = memberRepository.findByName(principal.getName()).get();
+        theModel.addAttribute("member", theMember);
 
         return "max-bet";
     }
 
     @GetMapping("/save")
-    public String saveMaxBet(@ModelAttribute("call") Call theCall) {
+    public String saveMaxBet(@ModelAttribute("call") Call theCall, Principal principal) {
 
 //        try {
 //            maxBetService.getAllMatchesMaxBetBonus(theCall.getAddress(), theCall.getTime());
 //        } catch (Exception e) {
 //            throw new RuntimeException(e);
 //        }
-        reportsService.save();
+        reportsService.save(theCall.getAddress(), principal.getName());
 
         return "home";
     }

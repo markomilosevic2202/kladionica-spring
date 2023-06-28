@@ -61,7 +61,13 @@ User: <span sec:authentication="principal.username"></span>
          (Only for Manager peeps)
      </p>
 
+
+
 </div>
+<p>
+    <a th:href="@{/reports}">Reports</a>
+    (Only for Manager peeps)
+</p>
 <hr>
 <div sec:authorize="hasRole('ADMIN')">
 <p>

@@ -15,4 +15,7 @@ public interface AddressRepository  extends JpaRepository<Address, Integer> {
     @Query("select a from Address a where a.name = ?1")
     Optional<Address> findByName(String name);
 
+    @Query("select a from Address a where a.address = ?1")
+    Optional<Address> findByAddress(String name);
+
 }

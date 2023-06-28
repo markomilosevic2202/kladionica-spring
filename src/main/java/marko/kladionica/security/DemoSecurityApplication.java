@@ -43,8 +43,20 @@ public class DemoSecurityApplication {
                 .roles("EMPLOYEE", "MANAGER", "ADMIN")
                 .build();
 
+
+
         return new InMemoryUserDetailsManager(john, mary, susan);
     }
+//    @Bean
+//    public UserDetailsManager userDetailsManager(DataSource dataSource) {
+//
+//        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+//        // define query to retrieve a user by username
+//        jdbcUserDetailsManager.setUsersByUsernameQuery("select member_id, pw, email from members where user_id = ?");
+//
+//
+//        return jdbcUserDetailsManager;
+//    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

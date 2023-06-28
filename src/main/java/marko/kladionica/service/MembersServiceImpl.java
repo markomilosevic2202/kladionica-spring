@@ -36,4 +36,9 @@ public class MembersServiceImpl implements MembersService {
         return theMember;
     }
 
+    @Override
+    public List<Member> getListAllMember() {
+       return memberRepository.findAll();
+    }
+
 }
